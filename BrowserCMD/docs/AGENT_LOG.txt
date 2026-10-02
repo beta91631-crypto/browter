@@ -18,3 +18,5 @@
 2026-10-02 | `PYTHONPATH=. "$BROWSERCMD_TEST_ENV/bin/python" -m unittest discover -s tests -p 'test_browser.py' -v` | 6 P1 tests passed, including local websockets server handshake | VERIFIED
 2026-10-02 | `PYTHONPATH=. "$BROWSERCMD_TEST_ENV/bin/python" -m unittest discover -s tests -v` | 12 total P0/P1 tests passed | VERIFIED
 2026-10-02 | Real Chromium/CDP launch and Windows Job Object kill-on-close | No browser/Windows available; Job Object adapter not implemented | UNTESTED
+2026-10-02 | `cd BrowserCMD && python3 -m venv .venv && ./.venv/bin/pip install -r requirements.txt` | Installed pinned dependencies: websockets 15.0.1, Pillow 12.3.0, NumPy 2.5.3 | VERIFIED
+2026-10-02 | `cd BrowserCMD && ./.venv/bin/python -m unittest discover -s tests -v` | 18 tests passed in 0.298s; BrowserCMD is currently passing its full L1 verification suite | VERIFIED
