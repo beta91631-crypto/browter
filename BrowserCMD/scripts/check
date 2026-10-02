@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+mkdir -p docs/checks
+
+PY_BIN="${PY_BIN:-$PWD/.venv/bin/python}"
+if [ ! -x "$PY_BIN" ]; then
+  PY_BIN="python3"
+fi
+
+"$PY_BIN" -m compileall browsercmd >/tmp/browsercmd-compileall.txt 2>&1
+
+"$PY_BIN" -m unittest discover -s tests -q
+
+if grep -RInE 'TODO|FIXME|NotImplementedError|except Exception: pass|except:|^\.\.\.$' browsercmd tests --include='*.py'; then
+  echo "Forbidden tokens found in shipped Python code." >&2
+  exit 1
+fi
+
+echo "CHECK: PASS"

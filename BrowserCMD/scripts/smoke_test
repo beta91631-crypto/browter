@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+mkdir -p docs/checks
+
+PY_BIN="${PY_BIN:-$PWD/.venv/bin/python}"
+if [ ! -x "$PY_BIN" ]; then
+  PY_BIN="python3"
+fi
+
+OUT_FILE="docs/checks/phase-0-smoke.txt"
+"$PY_BIN" -m browsercmd --fake-engine --debug 2>&1 | tee "$OUT_FILE"
+
+if ! grep -q "FAKE ENGINE: real engine UNTESTED" "$OUT_FILE"; then
+  echo "Smoke test did not produce the required fake-engine warning." >&2
+  exit 1
+fi
+
+echo "SMOKE_TEST: PASS"

@@ -12,12 +12,21 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="BrowserCMD terminal browser")
     parser.add_argument("--debug", action="store_true", help="Enable additional diagnostic detail")
     parser.add_argument("--crash-test", action="store_true", help=argparse.SUPPRESS)
+    parser.add_argument(
+        "--fake-engine",
+        action="store_true",
+        help="Use the fake browser backend for smoke tests; real engine remains UNTESTED.",
+    )
     parser.add_argument("--version", action="version", version=f"BrowserCMD {__version__}")
     args = parser.parse_args()
     logger, path = setup_logging(config={"debug": args.debug})
     install_exception_hooks(logger, path)
     if args.crash_test:
         raise RuntimeError("Deliberate logging crash test")
+    if args.fake_engine:
+        logger.warning("FAKE ENGINE: real engine UNTESTED")
+        print(f"BrowserCMD {__version__}: FAKE ENGINE: real engine UNTESTED. Session log: {path}")
+        return 0
     logger.info("Startup complete; browser navigation is not implemented yet")
     print(f"BrowserCMD {__version__}: startup logging ready. Session log: {path}")
     return 0
