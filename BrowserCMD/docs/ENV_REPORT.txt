@@ -1,0 +1,24 @@
+Capability level: L1
+
+OS and runtime
+- OS: Ubuntu 24.04.5 LTS (Noble Numbat), x86_64 Linux container.
+- Python: 3.14.2 at /home/codespace/.python/current/bin/python3.
+- pip: 26.2.1; `python3 -m pip check` reported no broken requirements.
+- Can run commands: yes; Python and pip commands completed.
+- Internet: yes; `curl` to https://pypi.org/simple/ returned HTTP 200.
+- Package installation: verified in a temporary target; installed and imported websockets 15.0.1, then removed the temporary directory.
+- Core packages currently importable: websockets no, Pillow (PIL) no, numpy no.
+
+Windows and browser tools
+- Windows: unavailable; platform.system() returned Linux.
+- Chromium browsers: Brave, Edge, Chrome, Chromium not found in PATH or checked standard executable paths.
+- chafa: not found in PATH.
+
+Terminal
+- A real pseudo-terminal is available; Python stdin/stdout/stderr all report isatty=True.
+- TERM=xterm-256color; COLORTERM=truecolor; WT_SESSION is unset.
+- Terminal size: 80 columns by 30 rows.
+- Truecolor: advertised by COLORTERM; not visually verified.
+- Sixel: not detected; no terminal query response was collected.
+
+Selected capability: L1. Pure Python logic can be run and tested. Chromium/CDP, Windows console input, Sixel, and Windows launcher/diagnostic behavior cannot be verified in this environment.

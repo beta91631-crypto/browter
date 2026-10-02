@@ -1,0 +1,20 @@
+2026-10-02 | `uname -a`, `python3 --version`, `python3 -m pip --version`, environment/browser/TTY probe | Ubuntu 24.04.5, Python 3.14.2, pip 26.2.1, no browser/Windows, TTY true | VERIFIED
+2026-10-02 | `curl` PyPI probe and `python3 -m pip index versions websockets` | HTTP 200 and package index accessible | VERIFIED
+2026-10-02 | Temporary `pip install --target ... websockets==15.0.1` and import | Installed/imported successfully; temporary target removed | VERIFIED
+2026-10-02 | `python3 -m pip check` | No broken requirements | VERIFIED
+2026-10-02 | `rg --files` | `rg` unavailable; repository file listing showed only `readme.md` | VERIFIED
+2026-10-02 | `PYTHONPATH=. python3 -m unittest discover -s tests -v` from repository root | Test discovery failed because the project test directory is under `BrowserCMD/` | VERIFIED
+2026-10-02 | `cd BrowserCMD && PYTHONPATH=. python3 -m unittest discover -s tests -v` | 2 test failures exposed JSON-key redaction and an overbroad assertion; corrected before acceptance | VERIFIED
+2026-10-02 | `cd BrowserCMD && ...` from already-entered `BrowserCMD/` | Directory change failed because shell persisted in project directory | VERIFIED
+2026-10-02 | `PYTHONPATH=. python3 -m unittest discover -s tests -v` from `BrowserCMD/` | 4 logging tests passed | VERIFIED
+2026-10-02 | `python3 -m browsercmd.diagnostics --output /tmp/browsercmd-diagnostic.txt` | Report created; pip, port bind, terminal capability, missing browser, and pending image pipeline recorded | VERIFIED
+2026-10-02 | Diagnostic/support-bundle smoke assertions | Localhost bind passed; browser/CDP absence explicit; last 300 lines selected and secrets redacted | VERIFIED
+2026-10-02 | `PYTHONPATH=. python3 -m unittest discover -s tests -v` | 6 P0 tests passed, including file cap and support bundle | VERIFIED
+2026-10-02 | `python3 -m browsercmd --crash-test` in isolated log directory | Exit 1; full traceback saved; log path printed | VERIFIED
+2026-10-02 | `BrowserCMD.bat`, `diagnose.bat`, `collect-logs.bat` | Source added; native Windows execution unavailable in this environment | UNTESTED
+2026-10-02 | Windows crash-window pause, terminal reset, browser launch/CDP, Sixel | No Windows/browser/Sixel-capable terminal available | UNTESTED
+2026-10-02 | Installed `requirements.txt` into `/tmp/browsercmd-test.QUA7d3` | websockets 15.0.1, Pillow 12.3.0, NumPy 2.5.3 imported successfully | VERIFIED
+2026-10-02 | `PYTHONPATH=. python3 -m unittest discover -s tests -p 'test_browser.py' -v` | 5 browser mock tests passed; initial terminal snapshot omitted a just-added test, rerun confirmed discovery | VERIFIED
+2026-10-02 | `PYTHONPATH=. "$BROWSERCMD_TEST_ENV/bin/python" -m unittest discover -s tests -p 'test_browser.py' -v` | 6 P1 tests passed, including local websockets server handshake | VERIFIED
+2026-10-02 | `PYTHONPATH=. "$BROWSERCMD_TEST_ENV/bin/python" -m unittest discover -s tests -v` | 12 total P0/P1 tests passed | VERIFIED
+2026-10-02 | Real Chromium/CDP launch and Windows Job Object kill-on-close | No browser/Windows available; Job Object adapter not implemented | UNTESTED
